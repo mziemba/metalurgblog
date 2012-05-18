@@ -8,7 +8,7 @@ __author__ = "M. Ziemba"
 __date__   = "2012-05-16, 23:09"
 
 from django.conf.urls.defaults import patterns, url
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.syndication.views import Feed
 from models import Post, Review
 
@@ -46,7 +46,9 @@ urlpatterns = patterns('blog.views',
     url(r'^archives/$', ListView.as_view(
                                queryset=Post.objects.all().order_by("-created"),
                                template_name="archives.html")),
-    url(r'^contact/$', 'contactpage'),
+    url(r'^shows/$', TemplateView.as_view(template_name="shows.html")),
+    url(r'^links/$', TemplateView.as_view(template_name="links.html")),
+    url(r'^contact/$', TemplateView.as_view(template_name="contact.html")),
     url(r'^tag/(?P<tag>\w+)$', 'tagpage'),
     url(r'^feed/$', BlogFeed())
 )
