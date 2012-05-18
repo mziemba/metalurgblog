@@ -19,3 +19,6 @@ def tagpage(request, tag):
     """
     posts = Post.objects.filter(tags__name=tag)
     return render_to_response("tagpage.html", {"posts": posts, "tag": tag})
+
+def contactpage(request):
+    return render_to_response("contact.html")

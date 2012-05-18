@@ -10,7 +10,7 @@ __date__   = "2012-05-16, 23:09"
 from django.conf.urls.defaults import patterns, url
 from django.views.generic import ListView, DetailView
 from django.contrib.syndication.views import Feed
-from models import Post
+from models import Post, Review
 
 
 class BlogFeed(Feed):
@@ -31,15 +31,22 @@ class BlogFeed(Feed):
         return u'/blog/%d' % item.id
 
 urlpatterns = patterns('blog.views',
-    url(r'^$', ListView.as_view(
-                               queryset=Post.objects.all().order_by("-created")[:2],
+    url(r'^blog/$', ListView.as_view(
+                               queryset=Post.objects.all().order_by("-created")[:10],
                                template_name="blog.html")),
-    url(r'^(?P<pk>\d+)$', DetailView.as_view(
+    url(r'^blog/(?P<pk>\d+)$', DetailView.as_view(
                                model=Post,
                                template_name="post.html")),
+    url(r'^reviews/$', ListView.as_view(
+                               queryset=Review.objects.all().order_by("-added")[:10],
+                               template_name="reviews.html")),
+    url(r'^reviews/(?P<pk>\d+)$', DetailView.as_view(
+                               model=Review,
+                               template_name="review.html")),
     url(r'^archives/$', ListView.as_view(
                                queryset=Post.objects.all().order_by("-created"),
                                template_name="archives.html")),
+    url(r'^contact/$', 'contactpage'),
     url(r'^tag/(?P<tag>\w+)$', 'tagpage'),
     url(r'^feed/$', BlogFeed())
 )

@@ -30,3 +30,6 @@ pip-log.txt
 
 # Other
 *.db
+
+# Static
+intothevoid/blog/static/images/

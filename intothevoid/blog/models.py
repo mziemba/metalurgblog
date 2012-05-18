@@ -11,20 +11,50 @@ from django.db import models
 from taggit.managers import TaggableManager
 
 
+class User(models.Model):
+    """Class representing a single user.
+
+    Fields:
+        login: user login
+    """
+    login = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return self.login
+
+
 class Post(models.Model):
     """Class representing a single post.
 
     Fields:
-        title -- post title
-        body -- post body text
-        created -- creation date
-        tags -- list of tags attached to post
+        title: post title
+        body: post body text
+        created: creation date
+        tags: list of tags attached to post
+        owner: creator of post
     """
 
     title = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField()
     tags = TaggableManager()
+    owner = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return self.title
+
+
+class Review(models.Model):
+    """Class representing a single review.
+
+    Fields:
+    """
+
+    title = models.CharField(max_length=100)
+    body = models.TextField()
+    added = models.DateTimeField()
+    tags = TaggableManager()
+    owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title
