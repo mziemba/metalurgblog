@@ -83,7 +83,9 @@ img.aligncenter {
   font-weight: bold;
 }
 
-/* Logo */
+/***************************************/
+/*                 LOGO                */
+/***************************************/
 
 #logo {
   float: left;
@@ -126,7 +128,14 @@ img.aligncenter {
   color: #A4A4A4;
 }
 
-/* Menu */
+#logo img {
+	width: 180px;
+	height: 180px;
+}
+
+/***************************************/
+/*                 MENU                */
+/***************************************/
 #menu {
   width: 960px;
   height: 40px;
@@ -168,7 +177,10 @@ img.aligncenter {
   color: #FFFFFF;
 }
 
-/* Page */
+/***************************************/
+/*                 PAGE                */
+/***************************************/
+
 #page {
   width: 960px;
   margin: 0 auto;
@@ -227,6 +239,13 @@ img.aligncenter {
 
 .post .entry a {
   color: #FFFFFF;
+}
+
+.post .entry img {
+	width: 186px;
+	height: 186px;
+	float: left;
+	padding: 0px 10px 0px 0px;
 }
 
 .links {

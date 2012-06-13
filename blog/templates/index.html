@@ -16,7 +16,7 @@
     <div id="header">
       <div id="logo">
         <h1><a href="/blog">♥ Metalurg </a></h1>
-        <p>volley</p>
+        <p>probably the best volleyball team</p>
       </div>
     </div>
   </div>
@@ -48,14 +48,19 @@
               <p>Metalurg jest drużyną siatkarską powstałą w Warszawie na początku 2012 roku.</p>
             </li>
             <li>
-              <h2>Categories</h2>
-              <ul>
+              <h2>Recent games</h2>
+              <!-- <ul>
                 <li><a href="#">Aliquam libero</a></li>
                 <li><a href="#">Consectetuer adipiscing elit</a></li>
                 <li><a href="#">Metus aliquam pellentesque</a></li>
                 <li><a href="#">Suspendisse iaculis mauris</a></li>
                 <li><a href="#">Urnanet non molestie semper</a></li>
                 <li><a href="#">Proin gravida orci porttitor</a></li>
+              </ul> -->
+              <ul>
+              {% for game in recent_games %}
+                  <li>{{ game.home }} {{ game.home_score }}:{{ game.away_score }} {{ game.away }}</li>
+              {% endfor %}
               </ul>
             </li>
             {% block archives %}

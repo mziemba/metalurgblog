@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""Definition of models.
-"""
+"""Definition of models."""
 
 __author__ = "M. Ziemba"
 __date__   = "2012-05-16, 23:05"
@@ -29,6 +28,7 @@ class Post(models.Model):
     Fields:
         title: post title
         body: post body text
+        image_uri: uri of image associated with post
         created: creation date
         tags: list of tags attached to post
         owner: creator of post
@@ -36,9 +36,24 @@ class Post(models.Model):
 
     title = models.CharField(max_length=100)
     body = models.TextField()
+    image_uri = models.CharField(max_length=50)
     created = models.DateTimeField()
     tags = TaggableManager()
     owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title
+
+class Game(models.Model):
+    """Class representing a single game.
+
+    Fields:
+    """
+    date = models.DateTimeField()
+    home = models.CharField(max_length=100)
+    away = models.CharField(max_length=100)
+    home_score = models.IntegerField()
+    away_score = models.IntegerField()
+
+    def __unicode__(self):
+        return "%s - %s" % (self.home, self.away)

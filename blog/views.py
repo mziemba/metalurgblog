@@ -12,7 +12,7 @@ from django.template import RequestContext
 from django.http import Http404
 from django.shortcuts import render_to_response
 
-from models import Post
+from models import Post, Game
 from utils import get_archive_posts, valid_month_param
 
 _LOGGER = logging.getLogger('blog.custom')
@@ -35,17 +35,48 @@ def _render_archive_posts(request, posts):
     all_posts = Post.objects.filter().order_by('-created')
     archive_posts = get_archive_posts(all_posts)
 
-    _LOGGER.debug("Posts archive dict: %s", str(archive_posts))
+    recent_games = Game.objects.filter().order_by('-date')[:5]
 
     return render_to_response("blog.html", {"posts": posts, "now": now,
-                                            "list_events": archive_posts},
+                                            "list_events": archive_posts,
+                                            "recent_games": recent_games},
                               context_instance=RequestContext(request))
 
-def index(request):
+def _render_default(request, page):
+    """Default render."""
+    now = datetime.datetime.now()
+
+    all_posts = Post.objects.filter().order_by('-created')
+    archive_posts = get_archive_posts(all_posts)
+
+    recent_games = Game.objects.filter().order_by('-date')[:5]
+
+    return render_to_response(page, {"now": now,
+                                     "list_events": archive_posts,
+                                     "recent_games": recent_games},
+                              context_instance=RequestContext(request))
+
+def posts_index(request):
     """Views main blog page.
     """
     posts = Post.objects.filter().order_by('-created')
     return _render_archive_posts(request, posts)
+
+def posts_single(request, post_id):
+    """View for showing single blog post."""
+    post = Post.objects.get(pk=post_id)
+    now = datetime.datetime.now()
+
+    all_posts = Post.objects.filter().order_by('-created')
+    archive_posts = get_archive_posts(all_posts)
+
+    recent_games = Game.objects.filter().order_by('-date')[:5]
+
+    return render_to_response("post.html", {"post": post,
+                                     "now": now,
+                                     "list_events": archive_posts,
+                                     "recent_games": recent_games},
+                              context_instance=RequestContext(request))
 
 def archive_month(request, year, month):
     """View for showing posts only from given month."""
@@ -63,20 +94,21 @@ def archive_year(request, year):
 
 def photos_index(request):
     """View for showing photos index."""
-    return render_to_response("photos.html",
-                              context_instance=RequestContext(request))
+    return _render_default(request, 'photos.html')
 
 def team_index(request):
     """View for showing team index."""
-    return render_to_response("team.html",
-                              context_instance=RequestContext(request))
+    return _render_default(request, 'team.html')
 
 def links_index(request):
     """View for showing links index."""
-    return render_to_response("links.html",
-                              context_instance=RequestContext(request))
+    return _render_default(request, 'links.html')
 
 def contact_index(request):
     """View for showing contact index."""
-    return render_to_response("contact.html",
+    return _render_default(request, 'contact.html')
+
+def handler404(request):
+    """View for 404 Not Found errors"""
+    return render_to_response('error/404.html',
                               context_instance=RequestContext(request))

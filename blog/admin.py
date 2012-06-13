@@ -8,7 +8,8 @@ __author__ = "M. Ziemba"
 __date__   = "2012-05-16, 23:04"
 
 from django.contrib import admin
-from models import User, Post
+from models import User, Post, Game
 
 admin.site.register(User)
 admin.site.register(Post)
+admin.site.register(Game)
