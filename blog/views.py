@@ -12,7 +12,7 @@ from django.template import RequestContext
 from django.http import Http404
 from django.shortcuts import render_to_response
 
-from models import Post, Game
+from models import Post, Game, Link
 from utils import get_archive_posts, valid_month_param
 
 _LOGGER = logging.getLogger('blog.custom')
@@ -22,11 +22,12 @@ def tagpage(request, tag):
     """View responsible for showing all posts for given tag.
 
     Args:
-        request -- request
-        tag -- tag by which we filter
+        request: request
+        tag: tag by which we filter
     """
     posts = Post.objects.filter(tags__name=tag)
-    return render_to_response("tagpage.html", {"posts": posts, "tag": tag})
+    return render_to_response("tagpage.html", {"posts": posts, "tag": tag},
+                              context_instance=RequestContext(request))
 
 def _render_archive_posts(request, posts):
     """Render archive posts."""
@@ -42,7 +43,7 @@ def _render_archive_posts(request, posts):
                                             "recent_games": recent_games},
                               context_instance=RequestContext(request))
 
-def _render_default(request, page):
+def _render_default(request, page, obj=None):
     """Default render."""
     now = datetime.datetime.now()
 
@@ -51,9 +52,12 @@ def _render_default(request, page):
 
     recent_games = Game.objects.filter().order_by('-date')[:5]
 
-    return render_to_response(page, {"now": now,
-                                     "list_events": archive_posts,
-                                     "recent_games": recent_games},
+    injected = {"now": now, "list_events": archive_posts,
+                "recent_games": recent_games}
+    if obj is not None:
+        injected['obj'] = obj
+
+    return render_to_response(page, injected,
                               context_instance=RequestContext(request))
 
 def posts_index(request):
@@ -102,7 +106,8 @@ def team_index(request):
 
 def links_index(request):
     """View for showing links index."""
-    return _render_default(request, 'links.html')
+    links = Link.objects.all()
+    return _render_default(request, 'links.html', obj=links)
 
 def contact_index(request):
     """View for showing contact index."""

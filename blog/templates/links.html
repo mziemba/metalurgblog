@@ -4,7 +4,10 @@
 
 {% block content %}
 
-    <p>Under construction</p>
+	<h3>Przydatne linki</h3>
+    {% for o in obj %}
+        <p>&bull; &nbsp; <a href="{{ o.url }}">{{ o.description }}</a></p>
+    {% endfor %}
     <div style="clear: both;">&nbsp;</div>
 
 {% endblock %}

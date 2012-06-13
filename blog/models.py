@@ -57,3 +57,12 @@ class Game(models.Model):
 
     def __unicode__(self):
         return "%s - %s" % (self.home, self.away)
+
+class Link(models.Model):
+    """Class representing a single http link."""
+
+    url = models.CharField(max_length=128)
+    description = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.url
