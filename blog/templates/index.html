@@ -4,7 +4,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>IntoTheVoid</title>
+<title>Metalurg blog</title>
 <link href='http://fonts.googleapis.com/css?family=Nova+Mono' rel='stylesheet' type='text/css' />
 <link href="{{ STATIC_URL }}style.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
@@ -14,7 +14,7 @@
   <div id="header-wrapper">
     <div id="header">
       <div id="logo">
-        <h1><a href="/blog">Into the Void </a></h1>
+        <h1><a href="/blog">Metalurg </a></h1>
         <p>a music blog</p>
       </div>
     </div>
@@ -57,17 +57,46 @@
                 <li><a href="#">Proin gravida orci porttitor</a></li>
               </ul>
             </li>
+            {% block archives %}
             <li>
               <h2>Archives</h2>
               <ul>
-                <li><a href="#">Aliquam libero</a></li>
+                <!--  <li><a href="#">Aliquam libero</a></li>
                 <li><a href="#">Consectetuer adipiscing elit</a></li>
                 <li><a href="#">Metus aliquam pellentesque</a></li>
                 <li><a href="#">Suspendisse iaculis mauris</a></li>
                 <li><a href="#">Urnanet non molestie semper</a></li>
-                <li><a href="#">Proin gravida orci porttitor</a></li>
+                <li><a href="#">Proin gravida orci porttitor</a></li> -->
+                {% for event_year in list_events %}
+                <ul class="year">{{event_year.keys.0}}
+                    {% for month, events in event_year.values.0.items %}
+                    <!--show only months with events! -->
+                    <!-- {% if events %} -->
+                        <li id="{{event_year.keys.0}}-{{month}}" class="month">
+                            <div class="month-data">
+                                <div class="collapsed">►&nbsp;</div>
+                                <div class="expanded" style="display:none;">▼&nbsp;</div>
+                                <span class="name"><a href="#">{{events.0.created|date:"F"}}</a></span>
+                                <span class="counter"> ({{events|length}})</span>
+                            </div>
+                            <ul class="events" style="display:none;">
+                            {% for event in events %}
+                                <li class="event">
+                                    <a class="title" href="#">{{event.title}}</a>
+                                    <div class="date">{{event.created|date:"j M Y"}}</div>
+                                    <div class="place">{{event.title}}</div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                    <!--  {% endif %} -->
+            </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
               </ul>
             </li>
+            {% endblock %}
           </ul>
         </div>
         <!-- end #sidebar -->

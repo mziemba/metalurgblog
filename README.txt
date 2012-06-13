@@ -1,4 +1,4 @@
-IntoTheVoid
+metalurgblog
 ===========
 
 Django based blog app

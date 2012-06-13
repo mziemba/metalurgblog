@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""Main url definitions for application.
-"""
+"""Main url definitions for application."""
 
 __author__ = "M. Ziemba"
 __date__   = "2012-05-15, 23:01"

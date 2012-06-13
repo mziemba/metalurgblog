@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    {% for post in object_list %}
+    {% for post in posts %}
         <div class="post">
             <h2 class="title"><a href="/blog/{{post.id}}">{{ post.title }} </a></h2>
             <p class="meta">
@@ -14,7 +14,7 @@
             </p>
 
             <div class="entry">
-                <p><img src="{{ STATIC_URL }}images/img03.jpg" width="186" height="186" alt="" class="alignleft border" />
+                <p><!-- <img src="{{ STATIC_URL }}images/img03.jpg" width="186" height="186" alt="" class="alignleft border" />-->
                 {{ post.body|safe|linebreaks }}</p>
             </div>
 

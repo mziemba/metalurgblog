@@ -1,4 +1,4 @@
-# Django settings for intothevoid project.
+# Django settings for metalurgblog project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'intothevoid.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'metalurg.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -100,7 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'intothevoid.urls'
+ROOT_URLCONF = 'metalurgblog.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -121,19 +121,30 @@ INSTALLED_APPS = (
     'blog',
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
+#----------------------------- LOGGING CONFIGURATION --------------------------
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': ('%(levelname)s %(asctime)s %(module)s %(process)d '
+                      '%(thread)d %(message)s')
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'django.request': {
@@ -141,5 +152,9 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'blog.custom': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        }
     }
 }

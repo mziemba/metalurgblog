@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 """Definition of urls specific to this blog application.
@@ -9,31 +8,14 @@ __date__   = "2012-05-16, 23:09"
 
 from django.conf.urls.defaults import patterns, url
 from django.views.generic import ListView, DetailView, TemplateView
-from django.contrib.syndication.views import Feed
+
+import views
 from models import Post, Review
+from feeds import BlogFeed
 
-
-class BlogFeed(Feed):
-    """Class providing RSS feed.
-    """
-
-    title = "IntoTheVoid"
-    description = "Blog about music"
-    link = "/blog/feed/"
-
-    def items(self):
-        return Post.objects.all().order_by("-created")[:2]
-    def item_title(self, item):
-        return item.title
-    def item_description(self, item):
-        return item.body
-    def item_link(self, item):
-        return u'/blog/%d' % item.id
 
 urlpatterns = patterns('blog.views',
-    url(r'^blog/$', ListView.as_view(
-                               queryset=Post.objects.all().order_by("-created")[:10],
-                               template_name="blog.html")),
+    url(r'^blog/$', views.index),
     url(r'^blog/(?P<pk>\d+)$', DetailView.as_view(
                                model=Post,
                                template_name="post.html")),

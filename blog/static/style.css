@@ -240,7 +240,10 @@ img.aligncenter {
   color: #FFFFFF;
 }
 
-/* Sidebar */
+/***************************************/
+/*               SIDEBAR               */
+/***************************************/
+
 #sidebar {
   float: right;
   width: 240px;

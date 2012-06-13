@@ -32,4 +32,4 @@ pip-log.txt
 *.db
 
 # Static
-intothevoid/blog/static/images/
+blog/static/images/
