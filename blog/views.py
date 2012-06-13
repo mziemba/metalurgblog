@@ -28,9 +28,6 @@ def tagpage(request, tag):
     posts = Post.objects.filter(tags__name=tag)
     return render_to_response("tagpage.html", {"posts": posts, "tag": tag})
 
-def contactpage(request):
-    return render_to_response("contact.html")
-
 def _render_archive_posts(request, posts):
     """Render archive posts."""
     now = datetime.datetime.now()
@@ -63,3 +60,23 @@ def archive_year(request, year):
     """View for showing posts only from given year."""
     posts = Post.objects.filter(created__year=year).order_by('-created')
     return _render_archive_posts(request, posts)
+
+def photos_index(request):
+    """View for showing photos index."""
+    return render_to_response("photos.html",
+                              context_instance=RequestContext(request))
+
+def team_index(request):
+    """View for showing team index."""
+    return render_to_response("team.html",
+                              context_instance=RequestContext(request))
+
+def links_index(request):
+    """View for showing links index."""
+    return render_to_response("links.html",
+                              context_instance=RequestContext(request))
+
+def contact_index(request):
+    """View for showing contact index."""
+    return render_to_response("contact.html",
+                              context_instance=RequestContext(request))

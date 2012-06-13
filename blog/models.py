@@ -42,19 +42,3 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
-
-
-class Review(models.Model):
-    """Class representing a single review.
-
-    Fields:
-    """
-
-    title = models.CharField(max_length=100)
-    body = models.TextField()
-    added = models.DateTimeField()
-    tags = TaggableManager()
-    owner = models.ForeignKey(User)
-
-    def __unicode__(self):
-        return self.title

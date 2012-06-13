@@ -15,7 +15,7 @@
   <div id="header-wrapper">
     <div id="header">
       <div id="logo">
-        <h1><a href="/blog">Metalurg ♥</a></h1>
+        <h1><a href="/blog">♥ Metalurg </a></h1>
         <p>volley</p>
       </div>
     </div>
@@ -26,10 +26,10 @@
   <div id="menu">
     <ul>
       <li class="{% block nav_home %}{% endblock %}"><a href="/blog">Blog</a></li>
-      <li class="{% block nav_reviews %}{% endblock %}"><a href="/reviews">Rewiews</a></li>
-      <li class=""><a href="/shows">Shows</a></li>
-      <li class=""><a href="/links">Links</a></li>
-      <li class=""><a href="/contact">Contact</a></li>
+      <li class="{% block nav_photos %}{% endblock %}"><a href="/photos">Photos</a></li>
+      <li class="{% block nav_team %}{% endblock %}"><a href="/team">Team</a></li>
+      <li class="{% block nav_links %}{% endblock %}"><a href="/links">Links</a></li>
+      <li class="{% block nav_contact %}{% endblock %}"><a href="/contact">Contact</a></li>
     </ul>
   </div>
   {% endblock %}
@@ -62,11 +62,11 @@
             <li>
               <h2>Archives</h2>
                 {% for event_year in list_events %}
-                <ul><a href="/blog/{{ event_year.keys.0 }}">{{ event_year.keys.0 }}</a>
+                <ul><a href="/blog/archives/{{ event_year.keys.0 }}">{{ event_year.keys.0 }}</a>
                     {% for month, events in event_year.values.0.items %}
                     <!--show only months with events! -->
                     {% if events %}
-                        <li>►<a href="/blog/{{ event_year.keys.0 }}/{{ month }}">{{ events.0.created|date:"F" }}
+                        <li>►<a href="/blog/archives/{{ event_year.keys.0 }}/{{ month }}">{{ events.0.created|date:"F" }}
                                   ({{ events|length }})</a></li>
                     {% endif %}
                     {% endfor %}
