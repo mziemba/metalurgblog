@@ -15,11 +15,11 @@ def get_archive_posts(posts):
         dict
     """
 
-        #create a dict with the years and months:posts
+    #create a dict with the years and months:posts
     event_dict = {}
     for i in range(posts[0].created.year, posts[len(posts)-1].created.year-1, -1):
         event_dict[i] = {}
-        for month in range(1,13):
+        for month in range(1, 13):
             event_dict[i][month] = []
     for event in posts:
         event_dict[event.created.year][event.created.month].append(event)
@@ -32,3 +32,13 @@ def get_archive_posts(posts):
         list_events.append(adict)
 
     return list_events
+
+def valid_month_param(month):
+    """Checks if given month is an int of value 1-12."""
+    try:
+        month = int(month)
+    except:
+        return False
+    if month < 1 or month > 12:
+        return False
+    return True

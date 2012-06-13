@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Definition of views used by app.
-"""
+"""Definition of views used by blog app."""
 
 __author__ = "M. Ziemba"
 __date__   = "2012-05-16, 23:11"
@@ -10,10 +9,11 @@ import datetime
 import logging
 
 from django.template import RequestContext
+from django.http import Http404
 from django.shortcuts import render_to_response
 
 from models import Post
-from utils import get_archive_posts
+from utils import get_archive_posts, valid_month_param
 
 _LOGGER = logging.getLogger('blog.custom')
 
@@ -31,16 +31,35 @@ def tagpage(request, tag):
 def contactpage(request):
     return render_to_response("contact.html")
 
-def index(request):
-    """Views main blog page.
-    """
-    posts = Post.objects.filter().order_by('-created')
+def _render_archive_posts(request, posts):
+    """Render archive posts."""
     now = datetime.datetime.now()
 
-    archive_posts = get_archive_posts(posts)
+    all_posts = Post.objects.filter().order_by('-created')
+    archive_posts = get_archive_posts(all_posts)
 
     _LOGGER.debug("Posts archive dict: %s", str(archive_posts))
 
     return render_to_response("blog.html", {"posts": posts, "now": now,
                                             "list_events": archive_posts},
                               context_instance=RequestContext(request))
+
+def index(request):
+    """Views main blog page.
+    """
+    posts = Post.objects.filter().order_by('-created')
+    return _render_archive_posts(request, posts)
+
+def archive_month(request, year, month):
+    """View for showing posts only from given month."""
+    if not valid_month_param(month):
+        _LOGGER.warn("Invalid argument 'month': %s", month)
+        raise Http404
+    posts = Post.objects.filter(created__year=year,
+                                created__month=month).order_by('-created')
+    return _render_archive_posts(request, posts)
+
+def archive_year(request, year):
+    """View for showing posts only from given year."""
+    posts = Post.objects.filter(created__year=year).order_by('-created')
+    return _render_archive_posts(request, posts)

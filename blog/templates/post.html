@@ -5,7 +5,7 @@
     <div class="post">
         <h2 class="title"><a href="/blog/{{post.id}}">{{ post.title }} </a></h2>
         <p class="meta">
-            Posted by <a href="#">Someone</a> on {{ post.created|date:"F j, Y" }} &nbsp;&bull;&nbsp;
+            Posted by <a href="#">{{ post.owner.login }}</a> on {{ post.created|date:"F j, Y" }} &nbsp;&bull;&nbsp;
             <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp;
             <!-- <a href="#" class="permalink">Full article</a> -->
             </p>
