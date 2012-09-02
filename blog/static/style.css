@@ -1,8 +1,11 @@
-/* Styles definition. */
+/***************************************/
+/*               GENERAL               */
+/***************************************/
+
 body {
   margin: 0;
   padding: 0;
-  background: #000000 url(images/background1.jpg) no-repeat fixed center;
+  background: #FFFFFF;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: #808080;
@@ -42,8 +45,7 @@ a {
 }
 
 a:hover {
-  /*text-decoration: underline;*/
-  color: #FFFFFF;
+  color: #2d2d2d;
 }
 
 img.border {
@@ -66,10 +68,11 @@ img.aligncenter {
 #wrapper {
   margin: 0 auto;
   padding: 0;
-  /*background: url(images/metalurg_logo_small.jpg) no-repeat right top;*/
 }
 
-/* Header */
+/***************************************/
+/*               HEADER                */
+/***************************************/
 
 #header-wrapper {
   height: 240px;
@@ -79,7 +82,7 @@ img.aligncenter {
   width: 960px;
   height: 240px;
   margin: 0 auto;
-  /*background: #000000;*/
+  background: #2d2d2d;
   font-weight: bold;
 }
 
@@ -92,7 +95,7 @@ img.aligncenter {
   height: 100px;
   margin: 0;
   padding: 0px;
-  color: #1A1A1A;
+  color: #FFFFFF;
 }
 
 #logo h1, #logo p {
@@ -103,16 +106,16 @@ img.aligncenter {
 #logo h1 {
   float: left;
   margin: 0px;
-  padding-top: 100px;
+  padding-top: 30px;
   padding-left: 30px;
   letter-spacing: -1px;
   text-transform: lowercase;
   font-size: 64px;
-  color: #1A1A1A;
+  color: #FFFFFF;
 }
 
 #logo h1 a {
-  color: #1A1A1A;
+  color: #FFFFFF;
 }
 
 #logo p {
@@ -136,12 +139,12 @@ img.aligncenter {
 /***************************************/
 /*                 MENU                */
 /***************************************/
+
 #menu {
   width: 960px;
   height: 40px;
   margin: 0 auto;
   padding: 0;
-  /*background: #000000;*/
 }
 
 #menu ul {
@@ -164,17 +167,17 @@ img.aligncenter {
   text-decoration: none;
   font-family: 'Nova Mono', cursive;
   font-size: 20px;
-  color: #B5B5B5;
+  color: #A1A1A1;
   border: none;
 }
 
 #menu .current_page_item a {
-  color: #FFFFFF;
+  text-decoration: underline;
 }
 
 #menu a:hover {
   text-decoration: none;
-  color: #FFFFFF;
+  color: #2d2d2d;
 }
 
 /***************************************/
@@ -195,7 +198,10 @@ img.aligncenter {
   padding: 40px 30px 0px 30px;
 }
 
-/* Content */
+/***************************************/
+/*               CONTENT               */
+/***************************************/
+
 #content {
   float: left;
   width: 600px;
@@ -288,7 +294,6 @@ img.aligncenter {
 #sidebar li li {
   padding-left: 20px;
   line-height: 35px;
-  /*background: url(images/img01.jpg) no-repeat left 12px;*/
 }
 
 #sidebar li li span {
@@ -320,11 +325,13 @@ img.aligncenter {
 }
 
 #sidebar a:hover {
-  /*text-decoration: underline;*/
-  color: #FFFFFF;
+  color: #2d2d2d;
 }
 
-/* Footer */
+/***************************************/
+/*               FOOTER                */
+/***************************************/
+
 #footer {
   width: 960px;
   height: 55px;
