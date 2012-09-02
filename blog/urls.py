@@ -5,7 +5,7 @@
 __author__ = "M. Ziemba"
 __date__   = "2012-05-16, 23:09"
 
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls.defaults import patterns, url, include
 
 import views
 from feeds import BlogFeed
@@ -21,6 +21,7 @@ urlpatterns = patterns('blog.views',
     url(r'^links/$', views.links_index),
     url(r'^contact/$', views.contact_index),
     url(r'^tag/(?P<tag>\w+)$', 'tagpage'),
+    url(r'^comments', include('django.contrib.comments.urls')),
     url(r'^feed/$', BlogFeed())
 )
 

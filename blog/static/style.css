@@ -241,6 +241,7 @@ img.aligncenter {
   margin-bottom: 25px;
   padding: 10px 0px 0px 0px;
   font-color: #191919;
+  min-height: 180px;
 }
 
 .post .entry a {
@@ -252,6 +253,37 @@ img.aligncenter {
 	height: 186px;
 	float: left;
 	padding: 0px 10px 0px 0px;
+}
+
+.post .comments {
+	margin-bottom: 20px;
+}
+
+.post .comments h3 {
+	color: #2d2d2d;
+	margin-bottom: 24px;
+}
+
+.post .comments .comment {
+	margin-left: 50px;
+	/*background-image: url('images/comment_bg.jpg');
+	background-repeat: repeat-y;*/
+	border-left: 5px solid;
+	padding: 5px 0 5px 10px;
+	margin-bottom: 36px;
+}
+
+.post .commentform h3 {
+	color: #2d2d2d;
+	margin-bottom: 10px;
+}
+
+.post .commentform form {
+	margin-left: 50px;
+}
+
+.post .commentform label {
+	width: 15%;
 }
 
 .links {
