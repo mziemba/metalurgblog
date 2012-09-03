@@ -38,8 +38,12 @@
         </div>
 
         <div class="commentform">
-            <h3>Add comment</h3>
-            {% render_comment_form for post %}
+            {% if user.is_authenticated %}
+                <h3>Add comment</h3>
+                {% render_comment_form for post %}
+            {% else %}
+                <p>Musisz być zalogowany aby dodawać komentarze.</p>
+            {% endif %}
         </div>
     </div>
     <div style="clear: both;">&nbsp;</div>

@@ -16,7 +16,13 @@
     <div id="header">
       <div id="logo">
         <h1><a href="/blog">♥ Metalurg </a></h1>
-        <p>probably the best volleyball team</p>
+      </div>
+      <div id="login-display">
+          {% if user.is_authenticated %}
+              <p>Zalogowany jako {{ user.username }}. <a href="/logout">Wyloguj</a>.</p>
+          {% else %}
+              <p>Witaj. <a href="/login">Zaloguj się</a> lub <a href="/register">zarejestruj</a>.</p>
+          {% endif %}
       </div>
     </div>
   </div>
@@ -26,10 +32,11 @@
   <div id="menu">
     <ul>
       <li class="{% block nav_home %}{% endblock %}"><a href="/blog">Blog</a></li>
-      <li class="{% block nav_photos %}{% endblock %}"><a href="/photos">Photos</a></li>
-      <li class="{% block nav_team %}{% endblock %}"><a href="/team">Team</a></li>
-      <li class="{% block nav_links %}{% endblock %}"><a href="/links">Links</a></li>
-      <li class="{% block nav_contact %}{% endblock %}"><a href="/contact">Contact</a></li>
+      <li class="{% block nav_photos %}{% endblock %}"><a href="/photos">Galeria</a></li>
+      <li class="{% block nav_team %}{% endblock %}"><a href="/team">Drużyna</a></li>
+      <li class="{% block nav_games %}{% endblock %}"><a href="#">Mecze</a></li>
+      <li class="{% block nav_links %}{% endblock %}"><a href="/links">Linki</a></li>
+      <li class="{% block nav_contact %}{% endblock %}"><a href="/contact">Kontakt</a></li>
     </ul>
   </div>
   {% endblock %}
@@ -44,19 +51,11 @@
         <div id="sidebar">
           <ul>
             <li>
-              <h2>About</h2>
+              <h2>O nas</h2>
               <p>Metalurg jest drużyną siatkarską powstałą w Warszawie na początku 2012 roku.</p>
             </li>
             <li>
-              <h2>Recent games</h2>
-              <!-- <ul>
-                <li><a href="#">Aliquam libero</a></li>
-                <li><a href="#">Consectetuer adipiscing elit</a></li>
-                <li><a href="#">Metus aliquam pellentesque</a></li>
-                <li><a href="#">Suspendisse iaculis mauris</a></li>
-                <li><a href="#">Urnanet non molestie semper</a></li>
-                <li><a href="#">Proin gravida orci porttitor</a></li>
-              </ul> -->
+              <h2>Ostatnie mecze</h2>
               <ul>
               {% for game in recent_games %}
                   <li>{{ game.home }} {{ game.home_score }}:{{ game.away_score }} {{ game.away }}</li>
@@ -65,7 +64,7 @@
             </li>
             {% block archives %}
             <li>
-              <h2>Archives</h2>
+              <h2>Archiwum</h2>
                 {% for event_year in list_events %}
                 <ul><a href="/blog/archives/{{ event_year.keys.0 }}">{{ event_year.keys.0 }}</a>
                     {% for month, events in event_year.values.0.items %}

@@ -5,8 +5,24 @@
 __author__ = "M. Ziemba"
 __date__ = "2012-06-11, 23:31"
 
+import datetime
+
+from models import Post
+from models import Game
+
 
 LOGGER_NAME = 'blog.logger'
+
+def get_extra_context():
+    now = datetime.datetime.now()
+
+    all_posts = Post.objects.filter().order_by('-created')
+    archive_posts = get_archive_posts(all_posts)
+
+    recent_games = Game.objects.filter().order_by('-date')[:5]
+    return {"now": now,
+            "list_events": archive_posts,
+            "recent_games": recent_games}
 
 def get_archive_posts(posts):
     """Get dict with posts archive grouped by years/months.

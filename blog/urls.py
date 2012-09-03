@@ -6,12 +6,17 @@ __author__ = "M. Ziemba"
 __date__   = "2012-05-16, 23:09"
 
 from django.conf.urls.defaults import patterns, url, include
+from django.contrib.auth.views import login
 
 import views
 from feeds import BlogFeed
+from utils import get_extra_context
 
 
 urlpatterns = patterns('blog.views',
+    url(r'^login/$', login, {'template_name': 'login.html', 'extra_context': get_extra_context()}),
+    url(r'^logout/$', views.logout_view),
+    url(r'^register/$', views.register),
     url(r'^blog/$', views.posts_index),
     url(r'^blog/archives/(?P<year>\d{4})$', views.archive_year),
     url(r'^blog/archives/(?P<year>\d{4})/(?P<month>\d+)$', views.archive_month),

@@ -74,16 +74,31 @@ img.aligncenter {
 /*               HEADER                */
 /***************************************/
 
+#login-display {
+  background: #FFFFFF;
+  height: 24px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-right: 24px;
+  padding: 0 10px 0 10px;
+}
+
+#login-display a {
+  color: #006699;
+}
+
 #header-wrapper {
-  height: 240px;
+  height: 180px;
 }
 
 #header {
   width: 960px;
-  height: 240px;
+  height: 180px;
   margin: 0 auto;
   background: #2d2d2d;
   font-weight: bold;
+  position: relative;
 }
 
 /***************************************/
@@ -109,7 +124,6 @@ img.aligncenter {
   padding-top: 30px;
   padding-left: 30px;
   letter-spacing: -1px;
-  text-transform: lowercase;
   font-size: 64px;
   color: #FFFFFF;
 }
@@ -132,8 +146,8 @@ img.aligncenter {
 }
 
 #logo img {
-	width: 180px;
-	height: 180px;
+  width: 180px;
+  height: 180px;
 }
 
 /***************************************/
@@ -249,41 +263,41 @@ img.aligncenter {
 }
 
 .post .entry img {
-	width: 186px;
-	height: 186px;
-	float: left;
-	padding: 0px 10px 0px 0px;
+  width: 186px;
+  height: 186px;
+  float: left;
+  padding: 0px 10px 0px 0px;
 }
 
 .post .comments {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .post .comments h3 {
-	color: #2d2d2d;
-	margin-bottom: 24px;
+  color: #2d2d2d;
+  margin-bottom: 24px;
 }
 
 .post .comments .comment {
-	margin-left: 50px;
-	/*background-image: url('images/comment_bg.jpg');
-	background-repeat: repeat-y;*/
-	border-left: 5px solid;
-	padding: 5px 0 5px 10px;
-	margin-bottom: 36px;
+  margin-left: 50px;
+  /*background-image: url('images/comment_bg.jpg');
+  background-repeat: repeat-y;*/
+  border-left: 5px solid;
+  padding: 5px 0 5px 10px;
+  margin-bottom: 36px;
 }
 
 .post .commentform h3 {
-	color: #2d2d2d;
-	margin-bottom: 10px;
+  color: #2d2d2d;
+  margin-bottom: 10px;
 }
 
 .post .commentform form {
-	margin-left: 50px;
+  margin-left: 50px;
 }
 
 .post .commentform label {
-	width: 15%;
+  width: 15%;
 }
 
 .links {
@@ -295,6 +309,22 @@ img.aligncenter {
   text-transform: uppercase;
   font-size: 10px;
   color: #FFFFFF;
+}
+
+#register-form h1 {
+    color: #2d2d2d;
+}
+
+#register-form form {
+    padding-top: 25px;
+}
+
+#login-form h1 {
+    color: #2d2d2d;
+}
+
+#login-form form {
+    padding-top: 25px;
 }
 
 /***************************************/
