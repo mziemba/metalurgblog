@@ -6,9 +6,9 @@
     <div class="post">
         <h2 class="title"><a href="/blog/{{post.id}}">{{ post.title }} </a></h2>
         <p class="meta">
-            Posted by <a href="#">{{ post.owner.login }}</a> on {{ post.created|date:"F j, Y" }} &nbsp;&bull;&nbsp;
+            Dodano przez: <a href="#">{{ post.owner.login }}</a> &nbsp;&bull;&nbsp; {{ post.created|date:"F j, Y" }} &nbsp;&bull;&nbsp;
             {% get_comment_count for post as comment_count %}
-            <a href="#post-comments" class="comments">Comments ({{ comment_count }})</a>
+            <a href="#post-comments" class="comments">Komentarze ({{ comment_count }})</a>
         </p>
 
         <div class="entry">
@@ -18,7 +18,7 @@
         </div>
 
         <div class="tags">
-            <p>Tags: &nbsp;
+            <p>Tagi: &nbsp;
             {% for tag in post.tags.all %}
                 <a href="/tag/{{tag}}">{{tag}}</a>
                 {% if not forloop.last %}, {%endif %}
@@ -27,11 +27,11 @@
         </div>
 
         <div class="comments" id="post-comments">
-            <h3>Comments</h3>
+            <h3>Komentarze</h3>
             {% get_comment_list for post as comment_list %}
             {% for comment in comment_list %}
                 <div class="comment">
-                    <p class="meta">Posted by: {{ comment.user_name }} on {{ comment.submit_date }}</p>
+                    <p class="meta">Dodany przez: <a href="#">{{ comment.user_name }}</a> &nbsp;&bull;&nbsp; {{ comment.submit_date }}</p>
                     {{ comment.comment }}
                 </div>
             {% endfor %}
@@ -39,7 +39,7 @@
 
         <div class="commentform">
             {% if user.is_authenticated %}
-                <h3>Add comment</h3>
+                <h3>Dodaj komentarz</h3>
                 {% render_comment_form for post %}
             {% else %}
                 <p>Musisz być zalogowany aby dodawać komentarze.</p>

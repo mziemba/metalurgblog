@@ -127,6 +127,10 @@ def photos_index(request):
     """View for showing photos index."""
     return _render_default(request, 'photos.html')
 
+def games_index(request):
+    """View for showing games index."""
+    return _render_default(request, 'games.html')
+
 def team_index(request):
     """View for showing team index."""
     return _render_default(request, 'team.html')
