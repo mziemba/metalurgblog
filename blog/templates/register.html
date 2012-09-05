@@ -3,27 +3,36 @@
 {% block content %}
     <div id="register-form">
         <h1>Rejestracja użytkownika</h1>
-        {% if form.errors %}
-            <p class="form-error">Podano nieprawidłowe dane</p>
-        {% endif %}
         <form action="." method="post">
             {% csrf_token %}
             <table>
-                <tr>
+                <tr class="register-tr">
                     <td><label for="id_username">Login</label></td>
                     <td>{{ form.username }}</td>
+                    <td>{% if 'username' in form.errors %}
+                        <div class="form-error">{{ form.username.errors.as_text }}</div>
+                        {% endif %}
+                    </td>
                 </tr>
-                <tr>
+                <tr class="register-tr">
                     <td>
                         <label for="id_password1">Hasło</label>
                     </td>
                     <td>{{ form.password1 }}</td>
+                    <td>{% if 'password1' in form.errors %}
+                        <div class="form-error">{{ form.password1.errors.as_text }}</div>
+                        {% endif %}
+                    </td>
                 </tr>
-                <tr>
+                <tr class="register-tr">
                     <td>
                         <label for="id_password2">Powtórz hasło</label>
                     </td>
                     <td>{{ form.password2 }}</td>
+                    <td>{% if 'password2' in form.errors %}
+                        <div class="form-error">{{ form.password2.errors.as_text }}</div>
+                        {% endif %}
+                    </td>
                 </tr>
             </table>
             <div class="submit-button">

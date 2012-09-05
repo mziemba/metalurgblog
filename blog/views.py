@@ -12,9 +12,10 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 from models import Post, Game, Link
+from forms import CustomRegistrationForm
 from utils import get_archive_posts, valid_month_param, get_extra_context
 
 _LOGGER = logging.getLogger('blog.custom')
@@ -28,7 +29,7 @@ def register(request):
     """User registration view."""
     extra_context = get_extra_context()
     if request.method == 'POST':
-        user_form = UserCreationForm(request.POST)
+        user_form = CustomRegistrationForm(request.POST)
 
         if user_form.is_valid():
             user_form.save()
@@ -38,7 +39,7 @@ def register(request):
             return render_to_response("login.html", extra_context,
                                       context_instance=RequestContext(request))
     else:
-        user_form = UserCreationForm()
+        user_form = CustomRegistrationForm()
 
     extra_context['form'] = user_form
     return render_to_response("register.html", extra_context,

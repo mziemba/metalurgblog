@@ -314,6 +314,15 @@ img.aligncenter {
     padding-bottom: 20px;
 }
 
+#register-form td {
+    height: 30px;
+    vertical-align: middle;
+}
+
+#register-form p {
+    line-height: 100%;
+}
+
 .form-error {
     color: #CD3333;
 }

@@ -10,7 +10,7 @@
     <div id="login-form">
         <h1>Logowanie użytkownika</h1>
     {% if form.errors %}
-        <p class="form-error">Podano niewłaściwego użytkownika i hasło.</p>
+        <p class="form-error">Podano niewłaściwego użytkownika lub hasło</p>
     {% endif %}
 
     <form method="post" action="{% url django.contrib.auth.views.login %}">
