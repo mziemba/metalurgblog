@@ -10,11 +10,12 @@ import logging
 from django.template import RequestContext
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.contrib import messages
 from django.contrib.auth import logout
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from models import Post, Game, Link
-from utils import get_archive_posts, valid_month_param
+from utils import get_archive_posts, valid_month_param, get_extra_context
 
 _LOGGER = logging.getLogger('blog.custom')
 
@@ -24,22 +25,23 @@ def logout_view(request):
     return HttpResponseRedirect('/blog')
 
 def register(request):
-    user_form = UserCreationForm(request.POST)
+    """User registration view."""
+    extra_context = get_extra_context()
+    if request.method == 'POST':
+        user_form = UserCreationForm(request.POST)
 
-    if user_form.is_valid():
-        user_form.save()
-        return HttpResponseRedirect("/blog")
+        if user_form.is_valid():
+            user_form.save()
+            messages.info(request, 'Dodano nowego użytkownika')
+            login_form = AuthenticationForm()
+            extra_context['form'] = login_form
+            return render_to_response("login.html", extra_context,
+                                      context_instance=RequestContext(request))
+    else:
+        user_form = UserCreationForm()
 
-    now = datetime.datetime.now()
-
-    all_posts = Post.objects.filter().order_by('-created')
-    archive_posts = get_archive_posts(all_posts)
-
-    recent_games = Game.objects.filter().order_by('-date')[:5]
-
-    return render_to_response("register.html", {'form' : user_form, "now": now,
-                                            "list_events": archive_posts,
-                                            "recent_games": recent_games},
+    extra_context['form'] = user_form
+    return render_to_response("register.html", extra_context,
                               context_instance=RequestContext(request))
 
 def tagpage(request, tag):
