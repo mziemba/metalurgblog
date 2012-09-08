@@ -5,10 +5,10 @@
 __author__ = "M. Ziemba"
 __date__ = "2012-09-05, 21:22"
 
-import django.contrib.auth.forms as forms
+import django.contrib.auth.forms as auth_forms
 
 
-class CustomRegistrationForm(forms.UserCreationForm):
+class CustomRegistrationForm(auth_forms.UserCreationForm):
     """Custom registration form, used for overriding default error
     messages.
     """

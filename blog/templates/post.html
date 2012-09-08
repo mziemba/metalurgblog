@@ -1,6 +1,8 @@
 {% extends "index.html" %}
 {% load comments %}
 
+{% block nav_home %}current_page_item{% endblock %}
+
 {% block content %}
 
     <div class="post">
@@ -28,6 +30,11 @@
 
         <div class="comments" id="post-comments">
             <h3>Komentarze</h3>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="flash-ok">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
             {% get_comment_list for post as comment_list %}
             {% for comment in comment_list %}
                 <div class="comment">
@@ -40,7 +47,19 @@
         <div class="commentform">
             {% if user.is_authenticated %}
                 <h3>Dodaj komentarz</h3>
-                {% render_comment_form for post %}
+                {% get_comment_form for post as form %}
+                <form action="{% comment_form_target %}" method="post">
+                    {% csrf_token %}
+                    <textarea id="id_comment" rows="5" cols="40" name="comment"></textarea>
+                    <input type="hidden" value="test@example.com" name="email" id="id_email" />
+                    {% for field in form %}
+                        {% if field.is_hidden %}
+                            <div>{{ field }}</div>
+                        {% endif %}
+                    {% endfor %}
+                    <input type="hidden" name="next" value="/blog/{{post.id}}#post-comments" />
+                    <input type="submit" name="submit" value="Dodaj">
+                </form>
             {% else %}
                 <p>Musisz być zalogowany aby dodawać komentarze.</p>
             {% endif %}

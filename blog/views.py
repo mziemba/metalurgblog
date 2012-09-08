@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 """Definition of views used by blog app."""
@@ -13,6 +14,8 @@ from django.shortcuts import render_to_response
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.comments import Comment
+from django.contrib.comments.signals import comment_was_posted
 
 from models import Post, Game, Link
 from forms import CustomRegistrationForm
@@ -44,6 +47,16 @@ def register(request):
     extra_context['form'] = user_form
     return render_to_response("register.html", extra_context,
                               context_instance=RequestContext(request))
+
+def comment_messages(sender, comment, request, **kwargs):
+    if request.user.is_authenticated():
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            ('Komentarz został dodany')
+        )
+
+comment_was_posted.connect(comment_messages, sender=Comment)
 
 def tagpage(request, tag):
     """View responsible for showing all posts for given tag.
@@ -143,8 +156,3 @@ def links_index(request):
 def contact_index(request):
     """View for showing contact index."""
     return _render_default(request, 'contact.html')
-
-def handler404(request):
-    """View for 404 Not Found errors"""
-    return render_to_response('error/404.html',
-                              context_instance=RequestContext(request))
