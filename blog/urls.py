@@ -20,7 +20,7 @@ urlpatterns = patterns('blog.views',
     url(r'^blog/$', views.posts_index),
     url(r'^blog/archives/(?P<year>\d{4})$', views.archive_year),
     url(r'^blog/archives/(?P<year>\d{4})/(?P<month>\d+)$', views.archive_month),
-    url(r'^blog/(?P<post_id>\d+)$', views.posts_single),
+    url(r'^blog/(?P<post_id>\d+)$', views.posts_single, name='post_view'),
     url(r'^photos/$', views.photos_index),
     url(r'^games/$', views.games_index),
     url(r'^team/$', views.team_index),
@@ -30,5 +30,3 @@ urlpatterns = patterns('blog.views',
     url(r'^comments', include('django.contrib.comments.urls')),
     url(r'^feed/$', BlogFeed())
 )
-
-handler404 = 'blog.views.handler404'

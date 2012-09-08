@@ -16,7 +16,7 @@ h1, h2, h3 {
   padding: 0;
   font-family: 'Nova Mono', cursive;
   font-weight: normal;
-  color: #2E9F13;
+  color: #2d2d2d;
 }
 
 h1 {
@@ -296,6 +296,10 @@ img.aligncenter {
 
 .post .commentform label {
   width: 15%;
+}
+
+.posts-tagged {
+  padding-top: 25px;
 }
 
 .links {

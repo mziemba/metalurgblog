@@ -11,8 +11,6 @@ from models import Post
 from models import Game
 
 
-LOGGER_NAME = 'blog.logger'
-
 def get_extra_context():
     now = datetime.datetime.now()
 

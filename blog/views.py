@@ -65,22 +65,18 @@ def tagpage(request, tag):
         request: request
         tag: tag by which we filter
     """
+    extra_context = get_extra_context()
     posts = Post.objects.filter(tags__name=tag)
-    return render_to_response("tagpage.html", {"posts": posts, "tag": tag},
+    extra_context['posts'] = posts
+    extra_context['tag'] = tag
+    return render_to_response("tagpage.html", extra_context,
                               context_instance=RequestContext(request))
 
 def _render_archive_posts(request, posts):
     """Render archive posts."""
-    now = datetime.datetime.now()
-
-    all_posts = Post.objects.filter().order_by('-created')
-    archive_posts = get_archive_posts(all_posts)
-
-    recent_games = Game.objects.filter().order_by('-date')[:5]
-
-    return render_to_response("blog.html", {"posts": posts, "now": now,
-                                            "list_events": archive_posts,
-                                            "recent_games": recent_games},
+    extra_context = get_extra_context()
+    extra_context['posts'] = posts
+    return render_to_response("blog.html", extra_context,
                               context_instance=RequestContext(request))
 
 def _render_default(request, page, obj=None):
@@ -101,25 +97,17 @@ def _render_default(request, page, obj=None):
                               context_instance=RequestContext(request))
 
 def posts_index(request):
-    """Views main blog page.
-    """
+    """Views main blog page."""
     posts = Post.objects.filter().order_by('-created')
     return _render_archive_posts(request, posts)
 
 def posts_single(request, post_id):
     """View for showing single blog post."""
+    extra_context = get_extra_context()
     post = Post.objects.get(pk=post_id)
-    now = datetime.datetime.now()
+    extra_context['post'] = post
 
-    all_posts = Post.objects.filter().order_by('-created')
-    archive_posts = get_archive_posts(all_posts)
-
-    recent_games = Game.objects.filter().order_by('-date')[:5]
-
-    return render_to_response("post.html", {"post": post,
-                                     "now": now,
-                                     "list_events": archive_posts,
-                                     "recent_games": recent_games},
+    return render_to_response("post.html", extra_context,
                               context_instance=RequestContext(request))
 
 def archive_month(request, year, month):

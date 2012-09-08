@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 """Definition of models."""
@@ -7,6 +6,7 @@ __author__ = "M. Ziemba"
 __date__   = "2012-05-16, 23:05"
 
 from django.db import models
+from django.db.models import permalink
 from taggit.managers import TaggableManager
 
 
@@ -33,7 +33,6 @@ class Post(models.Model):
         tags: list of tags attached to post
         owner: creator of post
     """
-
     title = models.CharField(max_length=100)
     body = models.TextField()
     image_uri = models.CharField(max_length=50)
@@ -43,6 +42,11 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    @permalink
+    def get_absolute_url(self):
+        return ('post_view', [str(self.id)])
+
 
 class Game(models.Model):
     """Class representing a single game.
