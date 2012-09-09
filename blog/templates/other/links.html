@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block nav_links %}current_page_item{% endblock %}
+
+{% block content %}
+
+	<h2 class="page-title">Przydatne linki</h2>
+    <ul class="tournaments">
+	{% for link in links %}
+        <li><a href="{{ link.url }}">{{ link.description }}</a></li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}

@@ -155,21 +155,27 @@ def tournament(request, tournament_id):
     extra_context = get_extra_context()
     tournament = Tournament.objects.get(pk=tournament_id)
     extra_context['tournament'] = tournament
-
     return render_to_response("fixtures/single.html", extra_context,
                               context_instance=RequestContext(request))
 
-# OTHER
+# TEAM
 
 def team_index(request):
     """View for showing team index."""
     return _render_default(request, 'team.html')
 
+# OTHER
+
 def links_index(request):
     """View for showing links index."""
+    extra_context = get_extra_context()
     links = Link.objects.all()
-    return _render_default(request, 'links.html', obj=links)
+    extra_context['links'] = links
+    return render_to_response("other/links.html", extra_context,
+                              context_instance=RequestContext(request))
 
 def contact_index(request):
     """View for showing contact index."""
-    return _render_default(request, 'contact.html')
+    extra_context = get_extra_context()
+    return render_to_response("other/contact.html", extra_context,
+                              context_instance=RequestContext(request))
