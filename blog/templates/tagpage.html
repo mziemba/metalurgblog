@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <h2>Posty otagowane: {{ tag }}</h2>
+    <h2 class="page-title">Posty otagowane: {{ tag }}</h2>
     <div class="posts-tagged">
         {% for post in posts %}
             <p>{{ post.created|date:"Y-m-d" }}: &nbsp; &nbsp;
