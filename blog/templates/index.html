@@ -34,7 +34,7 @@
       <li class="{% block nav_home %}{% endblock %}"><a href="/blog">Blog</a></li>
       <li class="{% block nav_photos %}{% endblock %}"><a href="/photos">Galeria</a></li>
       <li class="{% block nav_team %}{% endblock %}"><a href="/team">Drużyna</a></li>
-      <li class="{% block nav_games %}{% endblock %}"><a href="/games">Mecze</a></li>
+      <li class="{% block nav_fixtures %}{% endblock %}"><a href="{% url tournaments_view %}">Mecze</a></li>
       <li class="{% block nav_links %}{% endblock %}"><a href="/links">Linki</a></li>
       <li class="{% block nav_contact %}{% endblock %}"><a href="/contact">Kontakt</a></li>
     </ul>
@@ -56,16 +56,27 @@
             </li>
             <li>
               <h2>Ostatnie mecze</h2>
-              <ul>
-              {% for game in recent_games %}
-                  <li>{{ game.home }} {{ game.home_score }}:{{ game.away_score }} {{ game.away }}</li>
+              <table class="scores-sidebar">
+              {% for fixture in recent_fixtures %}
+                  <tr>
+                      <td class="team-name">
+                          {% if fixture.home == 'Metalurg' %}
+                              {{ fixture.away }}
+                          {% else %}
+                              {{fixture.home}}
+                          {% endif %}
+                      </td>
+                      <td {% if fixture.win %} class="score-won" {% else %} class="score-lost" {% endif %}>
+                          {{ fixture.home_score }}-{{ fixture.away_score }}
+                      </td>
+                  </tr>
               {% endfor %}
-              </ul>
+              </table>
             </li>
             {% block archives %}
             <li>
               <h2>Archiwum</h2>
-                {% for event_year in list_events %}
+                {% for event_year in archive_posts %}
                 <ul><a href="/blog/archives/{{ event_year.keys.0 }}">{{ event_year.keys.0 }}</a>
                     {% for month, events in event_year.values.0.items %}
                     <!--show only months with events! -->

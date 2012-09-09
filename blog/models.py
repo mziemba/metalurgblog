@@ -8,18 +8,7 @@ __date__   = "2012-05-16, 23:05"
 from django.db import models
 from django.db.models import permalink
 from taggit.managers import TaggableManager
-
-
-class User(models.Model):
-    """Class representing a single user.
-
-    Fields:
-        login: user login
-    """
-    login = models.CharField(max_length=64)
-
-    def __unicode__(self):
-        return self.login
+from django.contrib.auth.models import User
 
 
 class Post(models.Model):
@@ -48,16 +37,32 @@ class Post(models.Model):
         return ('post_view', [str(self.id)])
 
 
-class Game(models.Model):
+class Tournament(models.Model):
+    """Class representing a single season."""
+    name = models.CharField(max_length=128)
+    created = models.DateTimeField()
+
+    def __unicode__(self):
+        return self.name
+
+    @permalink
+    def get_absolute_url(self):
+        return ('tournament_view', [str(self.id)])
+
+
+class Fixture(models.Model):
     """Class representing a single game.
 
     Fields:
     """
     date = models.DateTimeField()
-    home = models.CharField(max_length=100)
-    away = models.CharField(max_length=100)
+    home = models.CharField(max_length=128)
+    away = models.CharField(max_length=128)
     home_score = models.IntegerField()
     away_score = models.IntegerField()
+    season = models.ForeignKey(Tournament)
+    level = models.CharField(max_length=48, null=True)
+    win = models.BooleanField()
 
     def __unicode__(self):
         return "%s - %s" % (self.home, self.away)

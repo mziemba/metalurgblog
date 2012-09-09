@@ -8,7 +8,7 @@
     <div class="post">
         <h2 class="title"><a href="/blog/{{post.id}}">{{ post.title }} </a></h2>
         <p class="meta">
-            Dodano przez: <a href="#">{{ post.owner.login }}</a> &nbsp;&bull;&nbsp; {{ post.created|date:"F j, Y" }} &nbsp;&bull;&nbsp;
+            Dodano przez: <a href="#">{{ post.owner.username }}</a> &nbsp;&bull;&nbsp; {{ post.created|date:"F j, Y" }} &nbsp;&bull;&nbsp;
             {% get_comment_count for post as comment_count %}
             <a href="#post-comments" class="comments">Komentarze ({{ comment_count }})</a>
         </p>

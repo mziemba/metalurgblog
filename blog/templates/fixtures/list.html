@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block nav_fixtures %}current_page_item{% endblock %}
+
+{% block content %}
+
+    <h2 class="page-title">Rozgrywki</h2>
+    <ul class="tournaments">
+	{% for tournament in tournaments %}
+        <li><a href="{{ tournament.get_absolute_url }}">{{ tournament.name }}</a></li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}

@@ -8,7 +8,7 @@ __date__ = "2012-06-11, 23:31"
 import datetime
 
 from models import Post
-from models import Game
+from models import Fixture
 
 
 def get_extra_context():
@@ -17,10 +17,10 @@ def get_extra_context():
     all_posts = Post.objects.filter().order_by('-created')
     archive_posts = get_archive_posts(all_posts)
 
-    recent_games = Game.objects.filter().order_by('-date')[:5]
+    recent_fixtures = Fixture.objects.filter().order_by('-date')[:5]
     return {"now": now,
-            "list_events": archive_posts,
-            "recent_games": recent_games}
+            "archive_posts": archive_posts,
+            "recent_fixtures": recent_fixtures}
 
 def get_archive_posts(posts):
     """Get dict with posts archive grouped by years/months.
@@ -31,6 +31,8 @@ def get_archive_posts(posts):
 
     #create a dict with the years and months:posts
     event_dict = {}
+    if not posts:
+        return []
     for i in range(posts[0].created.year, posts[len(posts)-1].created.year-1, -1):
         event_dict[i] = {}
         for month in range(1, 13):

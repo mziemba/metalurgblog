@@ -17,12 +17,14 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.comments import Comment
 from django.contrib.comments.signals import comment_was_posted
 
-from models import Post, Game, Link
+from models import Post, Fixture, Tournament, Link
 from forms import CustomRegistrationForm
 from utils import get_archive_posts, valid_month_param, get_extra_context
 
 _LOGGER = logging.getLogger('blog.custom')
 
+
+# USERS
 
 def logout_view(request):
     logout(request)
@@ -48,6 +50,8 @@ def register(request):
     return render_to_response("register.html", extra_context,
                               context_instance=RequestContext(request))
 
+# COMMENTS
+
 def comment_messages(sender, comment, request, **kwargs):
     if request.user.is_authenticated():
         messages.add_message(
@@ -57,6 +61,8 @@ def comment_messages(sender, comment, request, **kwargs):
         )
 
 comment_was_posted.connect(comment_messages, sender=Comment)
+
+# TAGS
 
 def tagpage(request, tag):
     """View responsible for showing all posts for given tag.
@@ -72,6 +78,8 @@ def tagpage(request, tag):
     return render_to_response("tagpage.html", extra_context,
                               context_instance=RequestContext(request))
 
+# ARCHIVES
+
 def _render_archive_posts(request, posts):
     """Render archive posts."""
     extra_context = get_extra_context()
@@ -86,15 +94,17 @@ def _render_default(request, page, obj=None):
     all_posts = Post.objects.filter().order_by('-created')
     archive_posts = get_archive_posts(all_posts)
 
-    recent_games = Game.objects.filter().order_by('-date')[:5]
+    recent_games = Fixture.objects.filter().order_by('-date')[:5]
 
-    injected = {"now": now, "list_events": archive_posts,
-                "recent_games": recent_games}
+    injected = {"now": now, "archive_posts": archive_posts,
+                "recent_fixtures": recent_games}
     if obj is not None:
         injected['obj'] = obj
 
     return render_to_response(page, injected,
                               context_instance=RequestContext(request))
+
+# POSTS
 
 def posts_index(request):
     """Views main blog page."""
@@ -124,13 +134,32 @@ def archive_year(request, year):
     posts = Post.objects.filter(created__year=year).order_by('-created')
     return _render_archive_posts(request, posts)
 
+# GALLERY
+
 def photos_index(request):
     """View for showing photos index."""
     return _render_default(request, 'photos.html')
 
-def games_index(request):
-    """View for showing games index."""
-    return _render_default(request, 'games.html')
+# FIXTURES
+
+def tournaments_list(request):
+    """View for showing tournaments index."""
+    extra_context = get_extra_context()
+    tournaments = Tournament.objects.filter().order_by('-created')
+    extra_context['tournaments'] = tournaments
+    return render_to_response("fixtures/list.html", extra_context,
+                              context_instance=RequestContext(request))
+
+def tournament(request, tournament_id):
+    """View for showing fixtures for a single tournament."""
+    extra_context = get_extra_context()
+    tournament = Tournament.objects.get(pk=tournament_id)
+    extra_context['tournament'] = tournament
+
+    return render_to_response("fixtures/single.html", extra_context,
+                              context_instance=RequestContext(request))
+
+# OTHER
 
 def team_index(request):
     """View for showing team index."""

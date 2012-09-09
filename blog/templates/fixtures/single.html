@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% block nav_fixtures %}current_page_item{% endblock %}
+
+{% block content %}
+
+    <h2 class="page-title">{{ tournament.name }}</h2>
+    <table class="results">
+	{% for fixture in tournament.fixture_set.all %}
+	    <tr class="result">
+	        <td class="fixture-day">{{ fixture.date|date:"Y.m.d" }}</td>
+	        <td class="fixture-time">{{ fixture.date|date:"H:i" }}</td>
+            <td class="team-name">{{ fixture.home }}</td>
+            <td class="team-name">{{ fixture.away }}</td>
+            <td {% if fixture.win %} class="score-won" {% else %} class="score-lost" {% endif %}>
+                {{ fixture.home_score }}-{{ fixture.away_score }}
+            </td>
+        </tr>
+	{% endfor %}
+	</table>
+
+	<div id="go-back">
+	    <a href="{% url tournaments_view %}">Wróć</a>
+	</div>
+
+{% endblock %}
