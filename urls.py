@@ -15,3 +15,6 @@ urlpatterns = patterns('',
     url(r'^', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
+
+handler500 = 'metalurgblog.blog.views.server_error'
+handler404 = 'metalurgblog.blog.views.page_not_found'

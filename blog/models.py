@@ -7,7 +7,7 @@ __date__   = "2012-05-16, 23:05"
 
 from django.db import models
 from django.db.models import permalink
-from taggit.managers import TaggableManager
+#from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
 
 
@@ -17,7 +17,7 @@ class Post(models.Model):
     body = models.TextField()
     image_uri = models.CharField(max_length=50)
     created = models.DateTimeField()
-    tags = TaggableManager()
+    #tags = TaggableManager()
     owner = models.ForeignKey(User)
 
     def __unicode__(self):

@@ -170,3 +170,14 @@ def links_index(request):
     extra_context['links'] = links
     return render_to_response("other/links.html", extra_context,
                               context_instance=RequestContext(request))
+
+# ERROR
+
+def server_error(request):
+    return render_to_response("error/500.html",
+                              context_instance=RequestContext(request))
+
+def page_not_found(request):
+    extra_context = get_extra_context()
+    return render_to_response("error/404.html", extra_context,
+                              context_instance=RequestContext(request))

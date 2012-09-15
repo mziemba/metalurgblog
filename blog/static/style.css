@@ -217,6 +217,11 @@ h2.page-title {
     padding-bottom: 40px;
 }
 
+h2.error-message {
+    padding-top: 30px;
+    color: #CD3333;
+}
+
 a.color-link {
     color: #006699;
 }
