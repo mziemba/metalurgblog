@@ -28,7 +28,6 @@ def get_archive_posts(posts):
     Returns:
         dict
     """
-
     #create a dict with the years and months:posts
     event_dict = {}
     if not posts:

@@ -15,11 +15,16 @@ class CustomRegistrationForm(auth_forms.UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(CustomRegistrationForm, self).__init__(*args, **kwargs)
-        self.error_messages['duplicate_username'] = ("Podany login jest już zajęty")
-        self.error_messages['password_mismatch'] = ("Podane hasła nie zgadzają się")
+        self.error_messages['duplicate_username'] = (
+            "Podany login jest już zajęty")
+        self.error_messages['password_mismatch'] = (
+            "Podane hasła nie zgadzają się")
 
         self.fields['username'].error_messages = {
-            'invalid': ("To pole może zawierać jedynie litery, cyfry lub znaki @/./+/-/_"),
+            'invalid': ("To pole może zawierać jedynie litery, "
+                        "cyfry lub znaki @/./+/-/_"),
             'required': ('Pole jest wymagane')}
-        self.fields['password1'].error_messages = {'required': ('Pole jest wymagane')}
-        self.fields['password2'].error_messages = {'required': ('Pole jest wymagane')}
+        self.fields['password1'].error_messages = {
+            'required': ('Pole jest wymagane')}
+        self.fields['password2'].error_messages = {
+            'required': ('Pole jest wymagane')}

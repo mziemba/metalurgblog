@@ -213,6 +213,7 @@ img.aligncenter {
 }
 
 h2.page-title {
+	padding-top: 30px;
     padding-bottom: 40px;
 }
 
@@ -320,6 +321,10 @@ a.color-link {
   font-size: 10px;
   color: #FFFFFF;
 }
+
+/***************************************/
+/*                FORMS                */
+/***************************************/
 
 #register-form h1 {
     color: #2d2d2d;

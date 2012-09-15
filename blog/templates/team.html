@@ -5,7 +5,15 @@
 {% block content %}
 
     <h2 class="page-title">Skład</h2>
-    <p>Under construction</p>
-    <div style="clear: both;">&nbsp;</div>
+    <table>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.number }}</td>
+                <td>{{ player.name }}</td>
+                <td>{{ player.surname }}</td>
+                <td>{{ player.position }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}

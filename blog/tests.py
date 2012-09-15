@@ -1,8 +1,6 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""Functional tests for blog app.
-"""
+"""Functional tests for blog app."""
 
 __author__ = "M. Ziemba"
 __date__ = "2012-05-20, 11:35"

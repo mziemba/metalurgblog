@@ -12,16 +12,7 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
-    """Class representing a single post.
-
-    Fields:
-        title: post title
-        body: post body text
-        image_uri: uri of image associated with post
-        created: creation date
-        tags: list of tags attached to post
-        owner: creator of post
-    """
+    """Class representing a single post."""
     title = models.CharField(max_length=100)
     body = models.TextField()
     image_uri = models.CharField(max_length=50)
@@ -51,10 +42,7 @@ class Tournament(models.Model):
 
 
 class Fixture(models.Model):
-    """Class representing a single game.
-
-    Fields:
-    """
+    """Class representing a single game."""
     date = models.DateTimeField()
     home = models.CharField(max_length=128)
     away = models.CharField(max_length=128)
@@ -67,11 +55,31 @@ class Fixture(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.home, self.away)
 
+
 class Link(models.Model):
     """Class representing a single http link."""
-
     url = models.CharField(max_length=128)
     description = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.url
+
+
+class Position(models.Model):
+    name = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Player(models.Model):
+    """Class representing a player entity."""
+    number = models.IntegerField(null=True)
+    name = models.CharField(max_length=64)
+    surname = models.CharField(max_length=64)
+    height = models.IntegerField(null=True)
+    weight = models.IntegerField(null=True)
+    position = models.ForeignKey(Position, null=True)
+
+    def __unicode__(self):
+        return "%s %s" % (self.name, self.surname)
