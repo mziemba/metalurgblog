@@ -27,7 +27,7 @@ _LOGGER = logging.getLogger('blog.custom')
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect('/blog')
+    return posts_index(request)
 
 def register(request):
     """User registration view."""
