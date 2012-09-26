@@ -8,7 +8,7 @@ __date__   = "2012-05-16, 23:11"
 
 import logging
 from django.template import RequestContext
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404
 from django.shortcuts import render_to_response
 from django.contrib import messages
 from django.contrib.auth import logout

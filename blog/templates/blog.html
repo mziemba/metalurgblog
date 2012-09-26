@@ -7,17 +7,22 @@
 
     {% for post in posts %}
         <div class="post">
-            <h2 class="title"><a href="/blog/{{post.id}}">{{ post.title }} </a></h2>
+            <h2 class="title"><a href="{% url post_view post.id %}">{{ post.title }} </a></h2>
             <p class="meta">
                 Dodano przez: <a href="#">{{ post.owner.username }}</a> &nbsp;&bull;&nbsp; {{ post.created|date:"j E Y" }} &nbsp;&bull;&nbsp;
                 {% get_comment_count for post as comment_count %}
-                <a href="/blog/{{post.id}}#post-comments" class="comments">Komentarze ({{ comment_count }})</a>
+                <a href="{% url post_view post.id %}#comments" class="comments">Komentarze ({{ comment_count }})</a>
             </p>
 
             <div class="entry">
                 <p>
                 <img src="{{ STATIC_URL }}images/{{ post.image_uri }}" />
-                {{ post.body|safe|linebreaks }}</p>
+                {% if post.body|wordcount > 50 %}
+                    {{ post.body|safe|truncatewords:50|linebreaks }}
+                    <div id="more"><a href="{% url post_view post.id %}">więcej</a></div>
+                {% else %}
+                    {{ post.body|safe|linebreaks }}</p>
+                {% endif %}
             </div>
 
             <!--<div class="tags">

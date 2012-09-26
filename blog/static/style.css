@@ -261,7 +261,7 @@ a.color-link {
 }
 
 .post .meta a {
-      color: #1A1A1A;
+    color: #1A1A1A;
 }
 
 .post .entry {
@@ -273,7 +273,15 @@ a.color-link {
 }
 
 .post .entry a {
-  color: #FFFFFF;
+    color: #555555;
+}
+
+#more {
+    float: right;
+}
+
+.post .entry a:hover {
+    color: #2d2d2d;
 }
 
 .post .entry img {

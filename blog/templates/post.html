@@ -6,11 +6,11 @@
 {% block content %}
 
     <div class="post">
-        <h2 class="title"><a href="/blog/{{post.id}}">{{ post.title }} </a></h2>
+        <h2 class="title"><a href="{% url post_view post.id %}">{{ post.title }} </a></h2>
         <p class="meta">
             Dodano przez: <a href="#">{{ post.owner.username }}</a> &nbsp;&bull;&nbsp; {{ post.created|date:"j E Y" }} &nbsp;&bull;&nbsp;
             {% get_comment_count for post as comment_count %}
-            <a href="#post-comments" class="comments">Komentarze ({{ comment_count }})</a>
+            <a href="#comments" class="comments">Komentarze ({{ comment_count }})</a>
         </p>
 
         <div class="entry">
@@ -28,7 +28,7 @@
             </p>
         </div>-->
 
-        <div class="comments" id="post-comments">
+        <div class="comments" id="comments">
             <h3>Komentarze</h3>
             {% if messages %}
                 {% for message in messages %}
