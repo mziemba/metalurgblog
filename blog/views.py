@@ -80,18 +80,6 @@ def comment_messages(sender, comment, request, **kwargs):
 comment_was_posted.connect(comment_messages, sender=Comment)
 
 
-# TAGS
-
-def tagpage(request, tag):
-    """View responsible for showing all posts for given tag."""
-    extra_context = get_extra_context()
-    posts = Post.objects.filter(tags__name=tag)
-    extra_context['posts'] = posts
-    extra_context['tag'] = tag
-    return render_to_response("tagpage.html", extra_context,
-                              context_instance=RequestContext(request))
-
-
 # ARCHIVES
 
 def _render_archive_posts(request, posts):

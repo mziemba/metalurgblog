@@ -382,7 +382,7 @@ a.color-link {
 
 ul.tournaments {
     list-style-type: none;
-    padding: 0 0 5px 25px;
+    padding: 0 0 5px 50px;
 }
 
 /***************************************/
@@ -421,6 +421,29 @@ td.score-won {
 
 td.score-lost {
     color: #CD3333;
+}
+
+table.team {
+    margin-left: 50px;
+}
+
+table.team img {
+	width: 50px;
+	height: 50px;
+	padding-right: 10px;
+}
+
+ul.team li:hover {
+    background-color: %555555;
+}
+
+table.team td.wide-column {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+tr.player {
+    font-size: 1.2em;
 }
 
 /***************************************/
@@ -484,6 +507,18 @@ td.score-lost {
 
 #sidebar a:hover {
   color: #2d2d2d;
+}
+
+#sidebar p.centered {
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+}
+
+#sidebar img.logo {
+    width: 200px;
+    height: 200px;
 }
 
 /***************************************/

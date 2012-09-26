@@ -19,15 +19,6 @@
             {{ post.body|safe|linebreaks }}
         </div>
 
-        <!-- <div class="tags">
-            <p>Tagi: &nbsp;
-            {% for tag in post.tags.all %}
-                <a href="/tag/{{tag}}">{{tag}}</a>
-                {% if not forloop.last %}, {%endif %}
-            {% endfor %}
-            </p>
-        </div>-->
-
         <div class="comments" id="comments">
             <h3>Komentarze</h3>
             {% if messages %}

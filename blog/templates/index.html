@@ -33,7 +33,7 @@
     <ul>
       <li class="{% block nav_home %}{% endblock %}"><a href="{% url index_view %}">Blog</a></li>
       <!--<li class="{% block nav_photos %}{% endblock %}"><a href="/photos">Galeria</a></li>-->
-      <!--<li class="{% block nav_team %}{% endblock %}"><a href="/team">Drużyna</a></li>-->
+      <li class="{% block nav_team %}{% endblock %}"><a href="{% url team_view %}">Drużyna</a></li>
       <li class="{% block nav_fixtures %}{% endblock %}"><a href="{% url tournaments_view %}">Mecze</a></li>
       <!-- <li class="{% block nav_achivements %}{% endblock %}"><a href="{% url achivements_view %}">Sukcesy</a></li>-->
       <li class="{% block nav_links %}{% endblock %}"><a href="{% url links_view %}">Linki</a></li>
@@ -52,7 +52,10 @@
           <ul>
             <li>
               <h2>O nas</h2>
-              <p>Metalurg jest drużyną siatkarską powstałą w Warszawie na początku 2012 roku.</p>
+              <p class="centered">
+                  <img class="logo" src="{{ STATIC_URL }}/images/metalurg_logo_small.jpg"></img>
+              </p>
+              <p>Metalurg jest amatorską drużyną siatkarską powstałą w Warszawie w październiku 2011 roku.</p>
             </li>
             <li>
               <h2>Ostatnie mecze</h2>
@@ -79,7 +82,6 @@
                 {% for event_year in archive_posts %}
                 <ul><a href="/blog/archives/{{ event_year.keys.0 }}">{{ event_year.keys.0 }}</a>
                     {% for month, events in event_year.values.0.items %}
-                    <!--show only months with events! -->
                     {% if events %}
                         <li>►<a href="/blog/archives/{{ event_year.keys.0 }}/{{ month }}">{{ events.0.created|date:"F" }}
                                   ({{ events|length }})</a></li>

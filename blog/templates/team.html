@@ -5,13 +5,13 @@
 {% block content %}
 
     <h2 class="page-title">Skład</h2>
-    <table>
+    <table class="team">
         {% for player in players %}
-            <tr>
-                <td>{{ player.number }}</td>
-                <td>{{ player.name }}</td>
-                <td>{{ player.surname }}</td>
-                <td>{{ player.position }}</td>
+            <tr class="player">
+                <td><img src="{{ STATIC_URL }}images/avatar-blank.jpg"></td>
+                <td class="wide-column">{{ player.number }}</td>
+                <td>{{ player.name }} {{ player.surname }}</td>
+                <td class="wide-column">{{ player.position }}</td>
             </tr>
         {% endfor %}
     </table>
