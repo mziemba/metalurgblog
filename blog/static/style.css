@@ -277,6 +277,7 @@ a.color-link {
 }
 
 #more {
+	padding-top: 10px;
     float: right;
 }
 
@@ -383,6 +384,40 @@ a.color-link {
 ul.tournaments {
     list-style-type: none;
     padding: 0 0 5px 50px;
+}
+
+div.players {
+    margin: 20px;
+}
+
+.players ul {
+    list-style-type: none;
+    width: 500px;
+}
+
+.players h3 {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+.players li img {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin: 0 15px 0 0;
+}
+
+.players li p {
+  font: 200 12px/1.5;
+}
+
+.players li {
+  padding: 10px;
+  overflow: auto;
+}
+
+.players li:hover {
+  background: #eee;
+  cursor: pointer;
 }
 
 /***************************************/

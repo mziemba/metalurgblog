@@ -5,7 +5,7 @@
 {% block content %}
 
     <h2 class="page-title">Skład</h2>
-    <table class="team">
+    <!-- <table class="team">
         {% for player in players %}
             <tr class="player">
                 <td><img src="{{ STATIC_URL }}images/avatar-blank.jpg"></td>
@@ -14,6 +14,17 @@
                 <td class="wide-column">{{ player.position }}</td>
             </tr>
         {% endfor %}
-    </table>
+    </table>-->
+    <div class="players">
+        <ul>
+        {% for player in players %}
+            <li>
+                <img src="{{ STATIC_URL }}images/avatar-blank.jpg" />
+                <h3>{{ player.name }} {{ player.surname }}</h3>
+                <p>{{ player.position }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}
