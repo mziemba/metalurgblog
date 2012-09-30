@@ -5,10 +5,12 @@
 {% block content %}
 
     <h2 class="page-title">Rozgrywki</h2>
-    <ul class="tournaments">
-	{% for tournament in tournaments %}
-        <li><a href="{{ tournament.get_absolute_url }}">{{ tournament.name }}</a></li>
-	{% endfor %}
-	</ul>
+    <div class="tournaments">
+        <ul>
+	    {% for tournament in tournaments %}
+            <li><a href="{{ tournament.get_absolute_url }}">{{ tournament.name }}</a></li>
+	    {% endfor %}
+	    </ul>
+	</div>
 
 {% endblock %}

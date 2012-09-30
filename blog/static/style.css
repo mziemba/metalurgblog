@@ -381,10 +381,36 @@ a.color-link {
 /*                LISTS                */
 /***************************************/
 
-ul.tournaments {
+/* tournaments */
+
+div.tournaments {
+    margin: 20px;
+}
+
+.tournaments ul {
     list-style-type: none;
+    width: 500px;
     padding: 0 0 5px 50px;
 }
+
+.tournaments li {
+  padding: 10px;
+  overflow: auto;
+}
+
+.tournaments li a {
+    margin: 0px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.tournaments li:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+/* players */
 
 div.players {
     margin: 20px;
