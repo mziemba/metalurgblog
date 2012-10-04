@@ -3,7 +3,7 @@
 """Definition of models."""
 
 __author__ = "M. Ziemba"
-__date__   = "2012-05-16, 23:05"
+__date__ = "2012-05-16, 23:05"
 
 from django.db import models
 from django.db.models import permalink
@@ -81,3 +81,38 @@ class Player(models.Model):
 
     def __unicode__(self):
         return "%s %s" % (self.name, self.surname)
+
+
+class Album(models.Model):
+    """Class representing a single Album entity from database."""
+    name = models.CharField(max_length=128)
+    #slug = models.SlugField(prepopulate_from=("name",))
+    summary = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    @permalink
+    def get_absolute_url(self):
+        return ('album_photos_view', [str(self.id)])
+
+
+class Photo(models.Model):
+    """Class representing a single Photo entity from database."""
+    title = models.CharField(max_length=256)
+    summary = models.TextField(blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+    #image = models.ImageField(upload_to='photos/%Y/%m')
+    uri = models.CharField(max_length=128)
+    album = models.ForeignKey(Album)
+    is_cover_photo = models.BooleanField()
+
+    def __unicode__(self):
+        return "%s" % self.uri
+
+    @permalink
+    def get_absolute_url(self):
+        return ('photo_view', [str(self.album_id), str(self.id)])

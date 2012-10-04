@@ -32,8 +32,8 @@
   <div id="menu">
     <ul>
       <li class="{% block nav_home %}{% endblock %}"><a href="{% url index_view %}">Blog</a></li>
-      <!--<li class="{% block nav_photos %}{% endblock %}"><a href="/photos">Galeria</a></li>-->
       <li class="{% block nav_team %}{% endblock %}"><a href="{% url team_view %}">Drużyna</a></li>
+      <li class="{% block nav_gallery %}{% endblock %}"><a href="{% url albums_view %}">Galeria</a></li>
       <li class="{% block nav_fixtures %}{% endblock %}"><a href="{% url tournaments_view %}">Mecze</a></li>
       <!-- <li class="{% block nav_achivements %}{% endblock %}"><a href="{% url achivements_view %}">Sukcesy</a></li>-->
       <!--<li class="{% block nav_links %}{% endblock %}"><a href="{% url links_view %}">Linki</a></li>-->
@@ -101,7 +101,7 @@
   <!-- end #page -->
 </div>
 <div id="footer">
-    <p>Copyright (c) 2012 Michał Ziemba.</a></p>
+    <p>Copyright (c) 2012 Metalurg Volley.</a></p>
 </div>
 <!-- end #footer -->
 </body>

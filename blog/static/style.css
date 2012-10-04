@@ -286,8 +286,8 @@ a.color-link {
 }
 
 .post .entry img {
-  width: 186px;
-  height: 186px;
+  width: 200px;
+  /*height: 186px;*/
   float: left;
   padding: 0px 10px 0px 0px;
 }
@@ -444,6 +444,60 @@ div.players {
 .players li:hover {
   background: #eee;
   cursor: pointer;
+}
+
+/* gallery */
+
+div.albums {
+    margin: 20px;
+}
+
+.albums ul {
+    list-style-type: none;
+    width: 500px;
+    padding: 0 0 5px 50px;
+}
+
+.albums li {
+  padding: 10px;
+  overflow: auto;
+}
+
+.albums li a {
+    margin: 0px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.albums li:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+div.album_photos {
+    width: 600px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.album_photos ul {
+    list-style-type: none;
+}
+
+.album_photos li img {
+    float: left;
+    padding: 10px;
+    height: 120px;
+}
+
+.album_photos li img:hover {
+    box-shadow: 0px 0px 7px rgba(255,255,255,0.9);
+    background: #eee;
+}
+
+.photo img {
+    max-width: 600px;
 }
 
 /***************************************/

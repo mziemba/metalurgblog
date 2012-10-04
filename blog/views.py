@@ -16,9 +16,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.comments import Comment
 from django.contrib.comments.signals import comment_was_posted
 
-from models import Post, Tournament, Link, Player
-from forms import CustomRegistrationForm
-from utils import valid_month_param, get_extra_context
+from blog.models import Post, Tournament, Link, Player, Album, Photo
+from blog.forms import CustomRegistrationForm
+from blog.utils import valid_month_param, get_extra_context
 
 _LOGGER = logging.getLogger('blog.custom')
 
@@ -107,10 +107,31 @@ def archive_year(request, year):
 
 # GALLERY
 
-def photos_index(request):
+def albums_view(request):
     """View for showing photos index."""
     extra_context = get_extra_context()
-    return render_to_response("photos.html", extra_context,
+    extra_context['albums'] = Album.objects.filter().order_by('-date_created')
+    return render_to_response("gallery/albums.html", extra_context,
+                              context_instance=RequestContext(request))
+
+def album_photos_view(request, album_id):
+    """View for showing album photos."""
+    extra_context = get_extra_context()
+    album = Album.objects.get(pk=album_id)
+    photos = Photo.objects.filter(album_id=album_id)
+    extra_context['album'] = album
+    extra_context['photos'] = photos
+    return render_to_response("gallery/album_photos.html", extra_context,
+                              context_instance=RequestContext(request))
+
+def photo_view(request, album_id, photo_id):
+    """View for showing single photos."""
+    extra_context = get_extra_context()
+    album = Album.objects.get(pk=album_id)
+    photo = Photo.objects.get(pk=photo_id)
+    extra_context['album'] = album
+    extra_context['photo'] = photo
+    return render_to_response("gallery/photo.html", extra_context,
                               context_instance=RequestContext(request))
 
 
