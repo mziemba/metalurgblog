@@ -4,7 +4,7 @@
 """Definition of views used by blog app."""
 
 __author__ = "M. Ziemba"
-__date__   = "2012-05-16, 23:11"
+__date__ = "2012-05-16, 23:11"
 
 import logging
 from django.template import RequestContext
@@ -15,6 +15,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.comments import Comment
 from django.contrib.comments.signals import comment_was_posted
+from django.core.exceptions import ObjectDoesNotExist
 
 from blog.models import Post, Tournament, Link, Player, Album, Photo
 from blog.forms import CustomRegistrationForm
@@ -60,11 +61,14 @@ def posts_index(request):
 def posts_single(request, post_id):
     """View for showing single blog post."""
     extra_context = get_extra_context()
-    post = Post.objects.get(pk=post_id)
-    extra_context['post'] = post
+    try:
+        post = Post.objects.get(pk=post_id)
+        extra_context['post'] = post
 
-    return render_to_response("post.html", extra_context,
-                              context_instance=RequestContext(request))
+        return render_to_response("post.html", extra_context,
+                                  context_instance=RequestContext(request))
+    except ObjectDoesNotExist:
+        raise Http404
 
 
 # COMMENTS
@@ -117,22 +121,28 @@ def albums_view(request):
 def album_photos_view(request, album_id):
     """View for showing album photos."""
     extra_context = get_extra_context()
-    album = Album.objects.get(pk=album_id)
-    photos = Photo.objects.filter(album_id=album_id)
-    extra_context['album'] = album
-    extra_context['photos'] = photos
-    return render_to_response("gallery/album_photos.html", extra_context,
-                              context_instance=RequestContext(request))
+    try:
+        album = Album.objects.get(pk=album_id)
+        photos = Photo.objects.filter(album_id=album_id)
+        extra_context['album'] = album
+        extra_context['photos'] = photos
+        return render_to_response("gallery/album_photos.html", extra_context,
+                                  context_instance=RequestContext(request))
+    except ObjectDoesNotExist:
+        raise Http404
 
 def photo_view(request, album_id, photo_id):
     """View for showing single photos."""
     extra_context = get_extra_context()
-    album = Album.objects.get(pk=album_id)
-    photo = Photo.objects.get(pk=photo_id)
-    extra_context['album'] = album
-    extra_context['photo'] = photo
-    return render_to_response("gallery/photo.html", extra_context,
-                              context_instance=RequestContext(request))
+    try:
+        album = Album.objects.get(pk=album_id)
+        photo = Photo.objects.get(pk=photo_id)
+        extra_context['album'] = album
+        extra_context['photo'] = photo
+        return render_to_response("gallery/photo.html", extra_context,
+                                  context_instance=RequestContext(request))
+    except ObjectDoesNotExist:
+        raise Http404
 
 
 # FIXTURES
@@ -148,10 +158,13 @@ def tournaments_list(request):
 def tournament(request, tournament_id):
     """View for showing fixtures for a single tournament."""
     extra_context = get_extra_context()
-    tournament = Tournament.objects.get(pk=tournament_id)
-    extra_context['tournament'] = tournament
-    return render_to_response("fixtures/single.html", extra_context,
-                              context_instance=RequestContext(request))
+    try:
+        tournament = Tournament.objects.get(pk=tournament_id)
+        extra_context['tournament'] = tournament
+        return render_to_response("fixtures/single.html", extra_context,
+                                  context_instance=RequestContext(request))
+    except ObjectDoesNotExist:
+        raise Http404
 
 
 # TEAM
@@ -163,6 +176,7 @@ def team_index(request):
     extra_context['players'] = players
     return render_to_response("team.html", extra_context,
                               context_instance=RequestContext(request))
+
 
 # OTHER
 
@@ -180,7 +194,8 @@ def links_index(request):
     return render_to_response("other/links.html", extra_context,
                               context_instance=RequestContext(request))
 
-# ERROR
+
+# ERRORS
 
 def server_error(request):
     return render_to_response("error/500.html",

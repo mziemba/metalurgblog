@@ -212,20 +212,6 @@ img.aligncenter {
   padding: 40px 30px 0px 30px;
 }
 
-h2.page-title {
-	padding-top: 30px;
-    padding-bottom: 40px;
-}
-
-h2.error-message {
-    padding-top: 30px;
-    color: #CD3333;
-}
-
-a.color-link {
-    color: #006699;
-}
-
 /***************************************/
 /*               CONTENT               */
 /***************************************/
@@ -234,6 +220,32 @@ a.color-link {
   float: left;
   width: 600px;
   padding: 0px 0px 0px 0px;
+}
+
+h2.page-title {
+	padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+div.error-page {
+    width: 400px;
+    padding: 40px 100px 0px 100px;
+}
+
+.error-page h2 {
+    padding-top: 30px;
+    text-align:center;
+}
+
+.error-page img {
+	width: 256px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a.color-link {
+    color: #006699;
 }
 
 .post {
@@ -287,7 +299,6 @@ a.color-link {
 
 .post .entry img {
   width: 200px;
-  /*height: 186px;*/
   float: left;
   padding: 0px 10px 0px 0px;
 }

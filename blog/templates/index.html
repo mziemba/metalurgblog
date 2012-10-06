@@ -11,7 +11,6 @@
     </head>
 <body>
 <div id="wrapper">
-    <!-- header -->
   <div id="header-wrapper">
     <div id="header">
       <div id="logo">
@@ -26,8 +25,6 @@
       </div>
     </div>
   </div>
-  <!-- end header -->
-  <!-- main menu -->
   {% block menu %}
   <div id="menu">
     <ul>
@@ -35,12 +32,9 @@
       <li class="{% block nav_team %}{% endblock %}"><a href="{% url team_view %}">Drużyna</a></li>
       <li class="{% block nav_gallery %}{% endblock %}"><a href="{% url albums_view %}">Galeria</a></li>
       <li class="{% block nav_fixtures %}{% endblock %}"><a href="{% url tournaments_view %}">Mecze</a></li>
-      <!-- <li class="{% block nav_achivements %}{% endblock %}"><a href="{% url achivements_view %}">Sukcesy</a></li>-->
-      <!--<li class="{% block nav_links %}{% endblock %}"><a href="{% url links_view %}">Linki</a></li>-->
     </ul>
   </div>
   {% endblock %}
-  <!-- end main menu -->
   <div id="page">
     <div id="page-bgtop">
       <div id="page-bgbtm">
@@ -93,16 +87,13 @@
             {% endblock %}
           </ul>
         </div>
-        <!-- end #sidebar -->
         <div style="clear: both;">&nbsp;</div>
       </div>
     </div>
   </div>
-  <!-- end #page -->
 </div>
 <div id="footer">
     <p>Copyright (c) 2012 Metalurg Volley.</a></p>
 </div>
-<!-- end #footer -->
 </body>
 </html>
