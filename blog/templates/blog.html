@@ -16,7 +16,11 @@
 
             <div class="entry">
                 <p>
-                <img src="{{ STATIC_URL }}images/{{ post.image_uri }}" />
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" />
+                {% else %}
+                    <img src="{{ STATIC_URL }}images/{{ post.image_uri }}" />
+                {% endif %}
                 {% if post.body|wordcount > 50 %}
                     {{ post.body|safe|truncatewords:50|linebreaks }}
                     <div id="more"><a href="{% url post_view post.id %}">więcej</a></div>

@@ -33,4 +33,5 @@ pip-log.txt
 
 # Static
 blog/static/images/
+blog/static/media/
 config/

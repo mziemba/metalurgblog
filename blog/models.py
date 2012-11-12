@@ -15,6 +15,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     body = models.TextField()
     image_uri = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="./", null=True)
     created = models.DateTimeField()
     owner = models.ForeignKey(User)
 
